@@ -33,6 +33,11 @@ The author takes full responsibility for the final codebase and any errors there
   - The dictionary contains sentiment scores for Korean words and emoticons
   - Used for token-level sentiment analysis in this research
   - Some vocabulary and their scores added or edited by the author
+     **Modifications by author:**
+    - Additional domain-specific vocabulary added
+    - Some polarity scores adjusted based on media context
+    - Modified version used for token-level sentiment analysis in this research
+  - Note: Modified lexicon is available in this repository as `dictionaries/SentiWord_Dict.txt`
 
     
 ## Project Structure
