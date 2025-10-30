@@ -24,7 +24,17 @@ Initial Python scripts for the following tasks were drafted using ChatGPT (OpenA
 
 The author takes full responsibility for the final codebase and any errors therein.
 
+## Acknowledgments
 
+
+**Sentiment Dictionary:**
+- **KNU Korean Sentiment Lexicon** (군산대학교 한국어 감성사전)
+  - Source: [KnuSentiLex GitHub Repository](https://github.com/park1200656/KnuSentiLex)
+  - The dictionary contains sentiment scores for Korean words and emoticons
+  - Used for token-level sentiment analysis in this research
+  - Some vocabulary and their scores added or edited by the author
+
+    
 ## Project Structure
 ```
 dissertation-sentiment-analysis/
