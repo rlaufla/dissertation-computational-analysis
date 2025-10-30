@@ -76,21 +76,22 @@ dissertation-sentiment-analysis/
 
 ##  Dependencies
 
+**Python version:** 3.10.9 (Anaconda distribution)
+
 Install with pip:
 ```bash
 pip install -r requirements.txt
 ```
 
 **Required packages**:
-- pandas
-- kiwipiepy
-- scipy
-- matplotlib
-- seaborn
-- openpyxl
-- scikit-learn
+- pandas (>=2.0.0)
+- kiwipiepy (==0.15.1)
+- scipy (>=1.11.0)
+- matplotlib (>=3.7.0)
+- seaborn (>=0.12.0)
+- openpyxl (>=3.1.0)
+- scikit-learn (>=1.3.0)
 
----
 
 ## How to Cite
 
