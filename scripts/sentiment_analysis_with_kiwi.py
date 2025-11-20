@@ -20,8 +20,7 @@
     "from kiwipiepy import Kiwi\n",
     "\n",
     "kiwi = Kiwi()\n",
-    "print(kiwi.analyze(\"정말 기분이 좋다\"))"
-   ]
+    ]
   },
   {
    "cell_type": "code",
