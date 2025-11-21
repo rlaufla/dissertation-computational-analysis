@@ -107,6 +107,19 @@ pip install -r requirements.txt
 - openpyxl (>=3.1.0)
 - scikit-learn (>=1.3.0)
 
+## Usage
+
+Run the complete analysis pipeline:
+```bash
+python scripts/full_sentiment_analysis.py
+```
+
+This will execute all three main analyses:
+1. Sentiment word extraction and visualisation
+2. Cliff's Delta effect size calculation
+3. Statistical tests (normality, homogeneity, group comparison) and plots
+
+All results will be saved to the `results/` directory.
 
 ## How to Cite
 
