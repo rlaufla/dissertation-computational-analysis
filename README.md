@@ -1,135 +1,145 @@
-# dissertation-computational-analysis
-Python script for computations analysis of Korean newspaper articles (Phd dissertation)
+# Computational Text Analysis for PhD Dissertation
 
+Python scripts for computational analysis of Korean newspaper articles, including TF-IDF analysis, sentiment scoring, and statistical testing.
 
-This repository contains all Python scripts and supporting files used in the sentiment analysis and lexical feature comparison of Korean media articles, including period-based TF-IDF and z-score heatmap visualization, as part of a PhD dissertation.
-
-> **Note:** Initial code drafts were generated with ChatGPT (OpenAI 2025), then reviewed, modified, and validated manually by the author.
+> **Note:** Initial code drafts were generated with ChatGPT (OpenAI, 2025) and subsequently reviewed, modified, and validated by the author.
 
 ---
 
-## AI Tool Usage Declaration
+## Repository Contents
 
-Initial Python scripts for the following tasks were drafted using ChatGPT (OpenAI 2025):
-- Sentiment dictionary mapping and token-level analysis logic
-- TF-IDF and z-score calculation across time periods
-- Statistical test implementation (Shapiro-Wilk, Mann-Whitney U, Levene's Test)
-- Data visualization code (boxplots, Q-Q plots, heatmaps)
+This repository includes:
+- **Morphological analysis** using KiwiPiePy tokeniser
+- **TF-IDF analysis**: Temporal comparison across six historical periods (1970–2023)
+- **Sentiment analysis**: Token-level scoring with custom Korean lexicon
+- **Statistical tests**: Shapiro-Wilk, Levene's test, Mann-Whitney U
+- **Visualisation**: Heatmaps, boxplots, Q-Q plots
 
-**Important:** All generated code was:
-- Thoroughly reviewed by the author for accuracy and appropriateness
-- Modified to fit the specific research requirements
-- Validated against expected outputs
-- Tested with actual dissertation data
+---
 
-The author takes full responsibility for the final codebase and any errors therein.
-
-## Acknowledgments
-
-
-**Sentiment Dictionary:**
-- **KNU Korean Sentiment Lexicon** (군산대학교 한국어 감성사전)
-  - Source: [KnuSentiLex GitHub Repository](https://github.com/park1200656/KnuSentiLex)
-  - The dictionary contains sentiment scores for Korean words and emoticons
-  - Used for token-level sentiment analysis in this research
-  - Some vocabulary and their scores added or edited by the author
-     **Modifications by author:**
-    - Additional domain-specific vocabulary added
-    - Some polarity scores adjusted based on media context
-    - Modified version used for token-level sentiment analysis in this research
-  - Note: Modified lexicon is available in this repository as `dictionaries/SentiWord_Dict.txt`
-
-    
 ## Project Structure
 ```
-dissertation-sentiment-analysis/
+dissertation-computational-analysis/
 ├── data/
-│   ├── 기사코딩20250603_감성분석포함.xlsx   # Raw input articles (Not publicly shared)
-│   └── dummy_sample_data.xlsx              # Dummy version with same structure
+│   └── README.md                           # Data availability notice
 ├── dictionaries/
-│   └── SentiWord_info.json                 # Custom Korean sentiment dictionary (JSON format)
+│   └── SentiWord_info.json                 # Modified Korean sentiment lexicon
 ├── scripts/
-│   ├── sentiment_analysis_with_kiwi.py     # Token-level sentiment scoring
-│   ├── media_type_classifier.py            # Maps Type 1+2 → Non-screen, Type 3 → Screen
-│   ├── tfidf_zscore_by_period.py           # Mean TF-IDF and z-score heatmap analysis
-│   ├── stats_tests_and_plots.py            # Mann–Whitney U, Shapiro–Wilk, boxplot, Q-Q
-│   └── export_summary_excel.py             # Summary (file, type, token stats) to Excel
-├── results/
-│   ├── sentiment_summary_table.xlsx        # Final summary output
-│   └── 시기별_top20_meanzscore.csv          # Mean z-score values for top 20 terms by period
+│   ├── TF-IDF.py                           # Period-based TF-IDF & z-score heatmap
+│   ├── Term frequency.py                   # Term frequency analysis
+│   └── sentiment_analysis_with_kiwi.py     # Token-level sentiment scoring
 ├── README.md
 └── requirements.txt
 ```
 
 ---
 
-## Main Analyses Included
+## Key Methodologies
 
-- **Sentiment Scoring** using a custom Korean lexicon and KIWI tokenizer
-- **TF-IDF Analysis**: Mean TF-IDF and z-score normalization across periods
-- **Token-based analysis** (not word count) for more accurate ratio calculations
-- **Media Type Classification**: 
-  - Type 1 + 2 → Non-screen media
-  - Type 3 → Screen media
-- **Statistical Tests**:
-  - Shapiro–Wilk (normality)
-  - Levene's Test (homogeneity of variance)
-  - Mann–Whitney U Test (used due to small N)
-- **Visualization**:
-  - Boxplots
-  - Q-Q plots
-  - Heatmaps (mean TF-IDF z-scores)
+### 1. TF-IDF Temporal Analysis
+- Extracts top-20 terms across entire corpus
+- Calculates mean TF-IDF per period
+- Z-score normalisation for comparison
+- Generates heatmap visualisation
 
----
+### 2. Sentiment Analysis
+- Token-based (not word count) for accuracy
+- Custom Korean sentiment dictionary (modified from KNU lexicon)
+- Outputs: sentiment ratio, positive/negative counts, average sentiment score
 
-## Output Variables (Exported to Excel)
-
-| 파일 | 유형 | 전체토큰수 | 감성단어수 | 평균감정점수 | 긍정단어수 | 부정단어수 | 감성단어비율 (%) |
-|------|------|------------|------------|---------------|-------------|-------------|-------------------|
+### 3. Statistical Testing
+- **Normality test**: Shapiro-Wilk
+- **Variance homogeneity**: Levene's test
+- **Group comparison**: Mann-Whitney U (used due to small sample size)
 
 ---
 
-##  Dependencies
+## Dependencies
 
-**Python version:** 3.10.9 (Anaconda distribution)
+**Python version:** 3.10.9
 
-Install with pip:
+Install required packages:
 ```bash
 pip install -r requirements.txt
 ```
 
-**Required packages**:
-- pandas (>=2.0.0)
-- kiwipiepy (==0.15.1)
-- scipy (>=1.11.0)
-- matplotlib (>=3.7.0)
-- seaborn (>=0.12.0)
-- openpyxl (>=3.1.0)
-- scikit-learn (>=1.3.0)
+**Key packages:**
+- kiwipiepy==0.15.1 (Korean morphological analyser)
+- scikit-learn>=1.3.0 (TF-IDF vectorisation)
+- pandas>=2.0.0
+- scipy>=1.11.0
+- matplotlib>=3.7.0
+- seaborn>=0.12.0
+
+---
 
 ## Usage
 
-### Sentiment Statistical Analysis
+### TF-IDF Temporal Analysis
+```bash
+python scripts/tfidf_temporal_analysis.py
+```
+**Outputs:**
+- `period_top20_meanTFIDF.csv`
+- `period_top20_mean_zscore.csv`
+- `heatmap_mean_tfidf_zscore.png`
+
+### Morphological Frequency Analysis
+```bash
+python scripts/morphological_frequency.py
+```
+**Outputs:**
+- `word_frequency.csv`
+
+### Sentiment Analysis
+```bash
+python scripts/sentiment_analysis_with_kiwi.py
+```
+**Outputs:**
+- Excel file with columns: File | Type | Total Tokens | Sentiment Words | Avg Score | Positive Count | Negative Count | Sentiment Ratio (%)
+- 'avg_sentiment_score_by_type.png'
+  
+### Statistical Analysis
 ```bash
 python scripts/sentiment_statistical_analysis.py
 ```
+**Outputs:**
+- Statistical test results
+- Boxplot and Q-Q plots
+- Summary Excel file
 
-Performs:
-- Shapiro-Wilk normality test
-- Levene's test for homogeneity of variance
-- Appropriate comparison test (Mann-Whitney U or t-test)
-- Generates boxplot and Q-Q plots
-- Exports summary statistics to Excel
+**Note:** Korean font (Malgun Gothic for Windows) required for proper visualisation.
 
-**Note**: Requires Korean font (Malgun Gothic) for proper visualisation.
+---
 
-## How to Cite
+## Data & Acknowledgments
 
-If using this code in your research, please cite as:
+### Data Confidentiality
+Raw newspaper articles are not included due to confidentiality requirements. Sample data structure is provided in `data/README.md`.
 
-> Kim, Youlim. (2025). *Dissertation Sentiment & Lexical Analysis* [Computer software]. GitHub. https://github.com/rlaufla/dissertation-sentiment-analysis
+### Sentiment Dictionary
+**Base lexicon:** KNU Korean Sentiment Lexicon (군산대학교 한국어 감성사전)
+- Source: [KnuSentiLex GitHub](https://github.com/park1200656/KnuSentiLex)
+- **Modifications by author:**
+  - Domain-specific vocabulary added
+  - Polarity scores adjusted for media context
+  - Modified version: `dictionaries/SentiWord_info.json`
 
-Initial scripts were drafted using ChatGPT (OpenAI 2025) and later refined by the author.
+### AI Tool Usage
+Initial Python scripts were drafted using ChatGPT (OpenAI, 2025) for:
+- TF-IDF and z-score calculation logic
+- Statistical test implementation
+- Visualisation code
+
+All generated code was thoroughly reviewed, modified, and validated by the author. The author takes full responsibility for the final codebase.
+
+---
+
+## Citation
+
+If using this code, please cite:
+
+> Kim, Youlim. (2025). *Computational Text Analysis for PhD Dissertation* [Computer software]. GitHub. https://github.com/rlaufla/dissertation-computational-analysis
 
 **References:**
 
@@ -137,18 +147,13 @@ OpenAI. (2025). *ChatGPT* (GPT-4) [Large language model]. https://chat.openai.co
 
 ---
 
-## Data Confidentiality Note
-
-Due to data confidentiality requirements, raw article texts are not included in this repository. A dummy file with matching structure is provided for demonstration purposes.
-
----
-
 ## License
 
-MIT License - Feel free to use with proper attribution.
+MIT License
 
 ---
 
-## 📧 Contact
+## Contact
 
-For questions regarding this code or methodology, please contact: Youlim.Kim@ruhr-uni-bochum.de
+Youlim Kim  
+Email: Youlim.Kim@ruhr-uni-bochum.de
