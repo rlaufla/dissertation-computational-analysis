@@ -109,17 +109,19 @@ pip install -r requirements.txt
 
 ## Usage
 
-Run the complete analysis pipeline:
+### Sentiment Statistical Analysis
 ```bash
-python scripts/full_sentiment_analysis.py
+python scripts/sentiment_statistical_analysis.py
 ```
 
-This will execute all three main analyses:
-1. Sentiment word extraction and visualisation
-2. Cliff's Delta effect size calculation
-3. Statistical tests (normality, homogeneity, group comparison) and plots
+Performs:
+- Shapiro-Wilk normality test
+- Levene's test for homogeneity of variance
+- Appropriate comparison test (Mann-Whitney U or t-test)
+- Generates boxplot and Q-Q plots
+- Exports summary statistics to Excel
 
-All results will be saved to the `results/` directory.
+**Note**: Requires Korean font (Malgun Gothic) for proper visualisation.
 
 ## How to Cite
 
